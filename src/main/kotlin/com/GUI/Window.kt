@@ -1,11 +1,13 @@
 package com.GUI
 
+import com.State.GameState
+import com.State.State
 import com.State.StateManager
 import org.lwjgl.glfw.Callbacks.glfwFreeCallbacks
 import org.lwjgl.glfw.GLFW.*
 import org.lwjgl.glfw.GLFWErrorCallback
+import org.lwjgl.opengl.GL
 import org.lwjgl.opengl.GL11.*
-import org.lwjgl.system.MemoryStack.stackPush
 import org.lwjgl.system.MemoryUtil
 import kotlin.properties.Delegates
 
@@ -37,8 +39,12 @@ class Window(private val width : Int, private val height : Int, private var titl
             throw RuntimeException("Failed to create GLFW window")
         }
 
+        // Make the OpenGL context current
+        glfwMakeContextCurrent(window)
+
         // Set up an error callback
         GLFWErrorCallback.createPrint(System.err).set()
+
 
         // Setup a key callback. It will be called every time a key is pressed, repeated or released.
         glfwSetKeyCallback(
@@ -50,38 +56,29 @@ class Window(private val width : Int, private val height : Int, private var titl
             ) // We will detect this in the rendering loop
         }
 
-        // Get the thread stack and push a new frame
-        stackPush().use { stack ->
-            val pWidth = stack.mallocInt(1) // int*
-            val pHeight = stack.mallocInt(1) // int*
+        // Center the winodw
+        val vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor())!!
+        glfwSetWindowPos(
+            window,
+            (vidmode.width() - width) / 2,
+            (vidmode.height() - height) / 2
+        )
 
-            // Get the window size passed to glfwCreateWindow
-            glfwGetWindowSize(window, pWidth, pHeight)
-
-            // Get the resolution of the primary monitor
-            val vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor())
-
-            // Center the window
-            glfwSetWindowPos(
-                window,
-                (vidmode!!.width() - pWidth[0]) / 2,
-                (vidmode!!.height() - pHeight[0]) / 2
-            )
-        }
-
-        // Make the OpenGL context current
-        glfwMakeContextCurrent(window)
         // Enable VSync
         glfwSwapInterval(1)
         // Make the window visible
         glfwShowWindow(window)
 
-
+        // Push the initial state onto the state manager
+        val gameState = GameState()
+        stateManager.pushState(gameState)
 
     }
 
 
     private fun loop() {
+        GL.createCapabilities()
+
         while (!glfwWindowShouldClose(window)) {
             // Process input
             glfwPollEvents()
@@ -112,7 +109,7 @@ class Window(private val width : Int, private val height : Int, private var titl
 
         // Terminate GLFW and free the error callback
         glfwTerminate();
-        glfwSetErrorCallback(null).free();
+        glfwSetErrorCallback(null)?.free();
     }
 
 }
