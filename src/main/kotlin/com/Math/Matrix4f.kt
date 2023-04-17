@@ -19,7 +19,7 @@ class Matrix4f {
 
         for (i in otherMatrix.indices) {
             for (j in otherMatrix[i].indices) {
-                answerMatrix[i][j] += otherMatrix[i][j]
+                answerMatrix[i][j] = otherMatrix[i][j] + matrix[i][j]
             }
         }
         return answer

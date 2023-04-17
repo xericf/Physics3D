@@ -15,7 +15,6 @@ import kotlin.properties.Delegates
 
 class Window(private var width : Int, private var height : Int, title : String) {
     private var title : String = title
-        get() = field
         set(value) {
             title = value
             glfwSetWindowTitle(window, title)
@@ -27,6 +26,10 @@ class Window(private var width : Int, private var height : Int, title : String) 
 
     private var resize : Boolean = false
     private var vSync : Boolean = true
+
+    // Time
+    val NANOSECOND : Float = 0.000000001f
+    var now : Float = 0f
 
     fun run() {
         init()
@@ -54,7 +57,7 @@ class Window(private var width : Int, private var height : Int, title : String) 
 
         setCallbacks()
 
-        // Center the winodw
+        // Center the window
         val vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor())!!
         glfwSetWindowPos(
             window,
@@ -83,6 +86,8 @@ class Window(private var width : Int, private var height : Int, title : String) 
     private fun loop() {
 
         while (!glfwWindowShouldClose(window)) {
+
+
             // Process input
             glfwPollEvents()
             stateManager.handleInput()
