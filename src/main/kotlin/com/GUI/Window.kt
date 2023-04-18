@@ -32,7 +32,8 @@ class Window(private var width : Int, private var height : Int, title : String) 
     // Time
     val NANOSECOND : Float = 0.000000001f
     val BILLION_NANOSECOND : Float = 1_000_000_000f
-    val secondsPerUpdate : Float = 1f / 60f
+    val secondsPerFrame : Float = 1f / 60f
+    val nanoSecondsPerFrame : Float = secondsPerFrame / BILLION_NANOSECOND
 
     fun run() {
         init()
@@ -93,12 +94,14 @@ class Window(private var width : Int, private var height : Int, title : String) 
         var deltaTime: Float
 
         while (!glfwWindowShouldClose(window)) {
+
             startTime = System.nanoTime()
             deltaTime = (startTime - previousTime) / BILLION_NANOSECOND
 
             // we will only update the physics / world at a fixed interval
-            if (deltaTime >= secondsPerUpdate) {
+            if (deltaTime >= secondsPerFrame) {
 
+                deltaTime = (startTime - previousTime) / BILLION_NANOSECOND
                 handleInput()
 
                 // Update the current state
@@ -110,8 +113,16 @@ class Window(private var width : Int, private var height : Int, title : String) 
 
             }
 
+            sync(startTime)
+        }
+    }
+
+    private fun sync(startTime : Long) {
+
+        while (System.nanoTime() < startTime + nanoSecondsPerFrame) {
             Thread.sleep(1)
         }
+
     }
 
     private fun handleInput() {
