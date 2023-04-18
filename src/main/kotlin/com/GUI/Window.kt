@@ -1,5 +1,6 @@
 package com.GUI
 
+import com.Engine.Time
 import com.State.GameState
 import com.State.State
 import com.State.StateManager
@@ -11,6 +12,7 @@ import org.lwjgl.opengl.GL11
 import org.lwjgl.opengl.GL11.*
 import org.lwjgl.system.MemoryUtil
 import kotlin.properties.Delegates
+import kotlin.system.measureNanoTime
 
 
 class Window(private var width : Int, private var height : Int, title : String) {
@@ -29,7 +31,8 @@ class Window(private var width : Int, private var height : Int, title : String) 
 
     // Time
     val NANOSECOND : Float = 0.000000001f
-    var now : Float = 0f
+    val BILLION_NANOSECOND : Float = 1_000_000_000f
+    val secondsPerUpdate : Float = 1f / 60f
 
     fun run() {
         init()
@@ -85,26 +88,47 @@ class Window(private var width : Int, private var height : Int, title : String) 
 
     private fun loop() {
 
+        var startTime: Long
+        var previousTime = System.nanoTime()
+        var deltaTime: Float
+
         while (!glfwWindowShouldClose(window)) {
+            startTime = System.nanoTime()
+            deltaTime = (startTime - previousTime) / BILLION_NANOSECOND
 
+            // we will only update the physics / world at a fixed interval
+            if (deltaTime >= secondsPerUpdate) {
 
-            // Process input
-            glfwPollEvents()
-            stateManager.handleInput()
+                handleInput()
 
-            // Update the current state
-            stateManager.update(0f)
+                // Update the current state
+                stateManager.update(deltaTime)
 
-            // Clear the screen
-            glClearColor(0.2f, 0.3f, 0.3f, 1.0f)
-            glClear(GL_COLOR_BUFFER_BIT)
+                render()
 
-            // Render the current state
-            stateManager.render()
+                previousTime = startTime
 
-            // Swap the buffers
-            glfwSwapBuffers(window)
+            }
+
+            Thread.sleep(1)
         }
+    }
+
+    private fun handleInput() {
+        glfwPollEvents()
+        stateManager.handleInput()
+    }
+
+    private fun render() {
+        // Clear the screen
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f)
+        glClear(GL_COLOR_BUFFER_BIT)
+
+        // Render the current state
+        stateManager.render()
+
+        // Swap the buffers
+        glfwSwapBuffers(window)
     }
 
     private fun setGlfwConfig() {
@@ -138,6 +162,7 @@ class Window(private var width : Int, private var height : Int, title : String) 
             ) // We will detect this in the rendering loop
         }
     }
+
     private fun cleanup() {
         // Clean up resources and dispose of the current states
         stateManager.dispose()

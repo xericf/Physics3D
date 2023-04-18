@@ -1,25 +1,27 @@
 package com.Engine
 
 import kotlin.system.measureNanoTime
+
+// Saving this time implementation for objects in the World, the update will be called in the world (?)
+// and then the scripts will call this object.
 object Time {
     private var startTime: Long = System.nanoTime()
     private var lastFrameTime: Long = System.nanoTime()
 
-    val time: Float
-        get() = (System.nanoTime() - startTime) / 1000000000f
+    var time: Float = 0f
+        private set
+    var deltaTime: Float = 0f
+        private set
 
-    val deltaTime: Float
-        get() {
-            val currentTime = System.nanoTime()
-            val delta = (currentTime - lastFrameTime) / 1000000000f
-            lastFrameTime = currentTime
-            return delta
-        }
+
 
     fun update() {
-        val currentTime = System.currentTimeMillis()
-        val deltaTime = (currentTime - lastFrameTime) / 1000f
+        var currentTime : Long = System.nanoTime()
+
+        deltaTime = (currentTime - lastFrameTime) / 1000000000f
+        time = currentTime / 1000000000f
+
         lastFrameTime = currentTime
-        // Update other time-related values or objects here.
+
     }
 }
