@@ -86,7 +86,6 @@ class Window(private var width : Int, private var height : Int, title : String) 
 
     }
 
-
     private fun loop() {
 
         var startTime: Long
