@@ -1,5 +1,6 @@
 package com.GUI
 
+import com.Engine.Renderer
 import com.State.WorldState
 import com.State.StateManager
 import org.lwjgl.glfw.Callbacks.glfwFreeCallbacks
@@ -27,7 +28,7 @@ class Window(private var width : Int, private var height : Int, title : String) 
 
 
     fun init() {
-
+        Renderer()
         // Initialize GLFW and create a window
         if (!glfwInit()) {
             throw IllegalStateException("Unable to initialize GLFW")
@@ -72,7 +73,7 @@ class Window(private var width : Int, private var height : Int, title : String) 
 
     fun clear() {
         // Clear the screen
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f)
+        setClearColor(0.2f, 0.3f, 0.3f, 1.0f)
         glClear(GL11.GL_COLOR_BUFFER_BIT)
     }
 
