@@ -1,6 +1,8 @@
 package com.State
 
-class GameState : State() {
+import com.GUI.Window
+
+class WorldState : State() {
 
     override fun init() {
 //        TODO("Not yet implemented")
@@ -10,11 +12,12 @@ class GameState : State() {
 //        TODO("Not yet implemented")
     }
 
-    override fun handleInput() {
-//        TODO("Not yet implemented")
+
+    override fun handleInput(window : Window) {
+
     }
 
-    override fun render() {
+    override fun render(window: Window) {
 //        TODO("Not yet implemented")
     }
 

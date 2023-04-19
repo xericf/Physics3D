@@ -1,18 +1,14 @@
 package com.GUI
 
-import com.Engine.Time
-import com.State.GameState
-import com.State.State
+import com.State.WorldState
 import com.State.StateManager
 import org.lwjgl.glfw.Callbacks.glfwFreeCallbacks
 import org.lwjgl.glfw.GLFW.*
 import org.lwjgl.glfw.GLFWErrorCallback
 import org.lwjgl.opengl.GL
-import org.lwjgl.opengl.GL11
 import org.lwjgl.opengl.GL11.*
 import org.lwjgl.system.MemoryUtil
 import kotlin.properties.Delegates
-import kotlin.system.measureNanoTime
 
 
 class Window(private var width : Int, private var height : Int, title : String) {
@@ -24,24 +20,12 @@ class Window(private var width : Int, private var height : Int, title : String) 
 
 
     private var window by Delegates.notNull<Long>()
-    private val stateManager : StateManager = StateManager()
 
     private var resize : Boolean = false
     private var vSync : Boolean = true
 
-    // Time
-    val NANOSECOND : Float = 0.000000001f
-    val BILLION_NANOSECOND : Float = 1_000_000_000f
-    val secondsPerFrame : Float = 1f / 60f
-    val nanoSecondsPerFrame : Float = secondsPerFrame / BILLION_NANOSECOND
 
-    fun run() {
-        init()
-        loop()
-        cleanup()
-    }
-
-    private fun init() {
+    fun init() {
 
         // Initialize GLFW and create a window
         if (!glfwInit()) {
@@ -81,65 +65,20 @@ class Window(private var width : Int, private var height : Int, title : String) 
         glEnable(GL_CULL_FACE)
         glEnable(GL_BACK) // cull backside of objects we can't see
 
-        // Push the initial state onto the state manager
-        stateManager.pushState(GameState())
+
 
     }
 
-    private fun loop() {
-
-        var startTime: Long
-        var previousTime = System.nanoTime()
-        var deltaTime: Float
-
-        while (!glfwWindowShouldClose(window)) {
-
-            startTime = System.nanoTime()
-            deltaTime = (startTime - previousTime) / BILLION_NANOSECOND
-
-            // we will only update the physics / world at a fixed interval
-            if (deltaTime >= secondsPerFrame) {
-
-                deltaTime = (startTime - previousTime) / BILLION_NANOSECOND
-                handleInput()
-
-                // Update the current state
-                stateManager.update(deltaTime)
-
-                render()
-
-                previousTime = startTime
-
-            }
-
-            sync(startTime)
-        }
-    }
-
-    private fun sync(startTime : Long) {
-
-        while (System.nanoTime() < startTime + nanoSecondsPerFrame) {
-            Thread.sleep(1)
-        }
-
-    }
-
-    private fun handleInput() {
-        glfwPollEvents()
-        stateManager.handleInput()
-    }
-
-    private fun render() {
-        // Clear the screen
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f)
-        glClear(GL_COLOR_BUFFER_BIT)
-
-        // Render the current state
-        stateManager.render()
-
+    fun render() {
         // Swap the buffers
         glfwSwapBuffers(window)
     }
+
+    fun input() {
+        glfwPollEvents()
+    }
+
+
 
     private fun setGlfwConfig() {
         // Configure GLFW
@@ -173,10 +112,7 @@ class Window(private var width : Int, private var height : Int, title : String) 
         }
     }
 
-    private fun cleanup() {
-        // Clean up resources and dispose of the current states
-        stateManager.dispose()
-
+    fun cleanup() {
         // Free the window callbacks and destroy the window
         glfwFreeCallbacks(window);
         glfwDestroyWindow(window);

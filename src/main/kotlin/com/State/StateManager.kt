@@ -1,10 +1,11 @@
 package com.State
 
+import com.GUI.Window
+
 // StateManagers are used for
 
-class StateManager {
+class StateManager(private val window : Window) {
     private val states: MutableList<State> = mutableListOf()
-
     fun pushState(state: State) {
         states.add(state)
         state.init()
@@ -27,11 +28,11 @@ class StateManager {
     }
 
     fun render() {
-        currentState()?.render()
+        currentState()?.render(window)
     }
 
     fun handleInput() {
-        currentState()?.handleInput()
+        currentState()?.handleInput(window)
     }
 
     fun dispose() {
