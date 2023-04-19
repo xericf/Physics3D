@@ -1,8 +1,8 @@
-package com.GUI
+package com.Engine
 
+import com.GUI.Window
 import com.State.StateManager
 import com.State.WorldState
-import org.lwjgl.glfw.GLFW
 import org.lwjgl.opengl.GL11
 
 class GameEngine(width: Int = 1200, height: Int = 720, title: String) {
@@ -73,13 +73,12 @@ class GameEngine(width: Int = 1200, height: Int = 720, title: String) {
         stateManager.handleInput() // uses the new inputs
     }
     private fun render() {
-        // Clear the screen
-        GL11.glClearColor(0.2f, 0.3f, 0.3f, 1.0f)
-        GL11.glClear(GL11.GL_COLOR_BUFFER_BIT)
+        window.clear()
 
         // Render the current state
         stateManager.render()
-        window.render() // swaps buffers
+
+        window.render() // swaps buffers, must be last
 
     }
 

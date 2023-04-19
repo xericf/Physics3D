@@ -6,6 +6,7 @@ import org.lwjgl.glfw.Callbacks.glfwFreeCallbacks
 import org.lwjgl.glfw.GLFW.*
 import org.lwjgl.glfw.GLFWErrorCallback
 import org.lwjgl.opengl.GL
+import org.lwjgl.opengl.GL11
 import org.lwjgl.opengl.GL11.*
 import org.lwjgl.system.MemoryUtil
 import kotlin.properties.Delegates
@@ -67,6 +68,12 @@ class Window(private var width : Int, private var height : Int, title : String) 
 
 
 
+    }
+
+    fun clear() {
+        // Clear the screen
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f)
+        glClear(GL11.GL_COLOR_BUFFER_BIT)
     }
 
     fun render() {

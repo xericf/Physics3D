@@ -5,13 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b42ed632-43c0-4448-9034-0e48ba03f40f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/GUI/GameEngine.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/Engine/Renderer.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/Engine/ShaderProgram.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fragment.frag" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/vertex.vert" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/GUI/GameEngine.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/Engine/GameEngine.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/GUI/Window.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/GUI/Window.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/Main.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/State/GameState.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/State/WorldState.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/State/State.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/State/State.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/State/StateManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/State/StateManager.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,24 +60,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/storm/Desktop/projects/Physics3D&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ignore.virus.scanning.warn.message": "true",
+    "jdk.selected.JAVA_MODULE": "13",
+    "last_opened_file_path": "C:/Users/storm/Desktop/projects/Physics3D",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/kotlin/com" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src" />
+    </key>
+    <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="com.Engine" />
     </key>
   </component>
   <component name="RunManager">
@@ -117,5 +124,8 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>
