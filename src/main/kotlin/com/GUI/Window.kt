@@ -28,7 +28,7 @@ class Window(private var width : Int, private var height : Int, title : String) 
 
 
     fun init() {
-        Renderer()
+
         // Initialize GLFW and create a window
         if (!glfwInit()) {
             throw IllegalStateException("Unable to initialize GLFW")
@@ -67,7 +67,7 @@ class Window(private var width : Int, private var height : Int, title : String) 
         glEnable(GL_CULL_FACE)
         glEnable(GL_BACK) // cull backside of objects we can't see
 
-
+        Renderer()
 
     }
 

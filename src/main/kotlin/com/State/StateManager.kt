@@ -38,5 +38,7 @@ class StateManager(private val window : Window) {
     fun dispose() {
         states.forEach { it.dispose() }
         states.clear()
+
+
     }
 }
