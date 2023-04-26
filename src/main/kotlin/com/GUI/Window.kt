@@ -58,6 +58,10 @@ class Window(private var width : Int, private var height : Int, title : String) 
         // Enable VSync
         if (vSync) glfwSwapInterval(1)
 
+        // Set up double buffering
+        glfwWindowHint(GLFW_DOUBLEBUFFER, GLFW_TRUE);
+
+
         // Make the window visible
         glfwShowWindow(window)
 
@@ -67,8 +71,6 @@ class Window(private var width : Int, private var height : Int, title : String) 
         glEnable(GL_CULL_FACE)
         glEnable(GL_BACK) // cull backside of objects we can't see
 
-        Renderer()
-
     }
 
     fun clear() {
@@ -77,7 +79,7 @@ class Window(private var width : Int, private var height : Int, title : String) 
         glClear(GL11.GL_COLOR_BUFFER_BIT)
     }
 
-    fun render() {
+    fun update() {
         // Swap the buffers
         glfwSwapBuffers(window)
     }

@@ -5,7 +5,7 @@ import org.lwjgl.opengl.GL30.*
 import org.lwjgl.system.MemoryUtil
 import java.nio.FloatBuffer
 
-class Loader {
+object Loader {
 
     // VAO: The purpose of a Vertex Array Object is to store configurations for each unique
     // mesh with vertex attribute pointers, this will let openGL know how to interpret a mesh's vertex data
@@ -38,13 +38,16 @@ class Loader {
         return vboId
     }
 
-    fun configureAttribPointer(vbo : Int, index: Int, size : Int = 3, type : Int = GL_FLOAT, stride : Int = 0, pointer : Long = 0) {
-        glBindBuffer(GL_ARRAY_BUFFER, vbo)
+    fun configureAttribPointer(vboId : Int, index: Int, size : Int = 3, type : Int = GL_FLOAT, stride : Int = 0, pointer : Long = 0) {
+        glBindBuffer(GL_ARRAY_BUFFER, vboId)
         glEnableVertexAttribArray(index) // Enable vertex attrib array (allows for data to be sent to GPU)
         glVertexAttribPointer(index, size, type, false, stride, pointer)
         glBindBuffer(GL_ARRAY_BUFFER, 0)
     }
 
+    fun bindVao(vaoId : Int) {
+        glBindVertexArray(vaoId)
+    }
 
     fun unbindVao() {
         glBindVertexArray(0)

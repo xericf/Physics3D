@@ -17,9 +17,11 @@ class GameEngine(width: Int = 1200, height: Int = 720, title: String) {
     val secondsPerFrame : Float = 1f / 60f
     val nanoSecondsPerFrame : Float = secondsPerFrame / BILLION
 
+    private lateinit var renderer : Renderer
+
     private fun init() {
         window.init()
-
+        renderer = Renderer() // TOdo: delete?
         // Push the initial state onto the state manager
         stateManager.pushState(WorldState())
     }
@@ -76,11 +78,13 @@ class GameEngine(width: Int = 1200, height: Int = 720, title: String) {
         window.clear()
 
         // Render the current state
-        stateManager.render()
 
-        window.render() // swaps buffers, must be last
+        renderer.render() // TODO: delete renderer from gameengine, put it in gameObjects?
+        window.update() // swaps buffers, must be last
+
 
     }
+    //        stateManager.render()
 
     private fun sync(startTime : Long) {
 
@@ -92,7 +96,9 @@ class GameEngine(width: Int = 1200, height: Int = 720, title: String) {
     private fun cleanup() {
         // Clean up resources and dispose of the current states
         stateManager.dispose()
+        Loader.cleanup()
         window.cleanup()
+
     }
 
 
