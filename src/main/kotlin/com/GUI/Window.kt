@@ -1,8 +1,5 @@
 package com.GUI
 
-import com.Engine.Renderer
-import com.State.WorldState
-import com.State.StateManager
 import org.lwjgl.glfw.Callbacks.glfwFreeCallbacks
 import org.lwjgl.glfw.GLFW.*
 import org.lwjgl.glfw.GLFWErrorCallback
@@ -76,7 +73,7 @@ class Window(private var width : Int, private var height : Int, title : String) 
     fun clear() {
         // Clear the screen
         setClearColor(0.2f, 0.3f, 0.3f, 1.0f)
-        glClear(GL11.GL_COLOR_BUFFER_BIT)
+        glClear(GL11.GL_COLOR_BUFFER_BIT or GL_STENCIL_BUFFER_BIT or GL_DEPTH_BUFFER_BIT)
     }
 
     fun update() {

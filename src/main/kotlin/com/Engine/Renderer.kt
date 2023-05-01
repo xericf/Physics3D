@@ -45,5 +45,9 @@ class Renderer {
         shaderProgram.unbind()
     }
 
+    fun cleanup() {
+        shaderProgram.cleanup()
+        // VBO & VAO cleaned in Loader
+    }
 
 }

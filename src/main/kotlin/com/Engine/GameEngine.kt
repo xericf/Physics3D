@@ -1,11 +1,12 @@
 package com.Engine
 
 import com.GUI.Window
+import com.State.State
 import com.State.StateManager
 import com.State.WorldState
 import org.lwjgl.opengl.GL11
 
-class GameEngine(width: Int = 1200, height: Int = 720, title: String) {
+class GameEngine(width: Int = 1200, height: Int = 720, title: String, private val initialState : State = WorldState()) {
 
 
     private val window : Window = Window(width, height, title)
@@ -21,9 +22,8 @@ class GameEngine(width: Int = 1200, height: Int = 720, title: String) {
 
     private fun init() {
         window.init()
-        renderer = Renderer() // TOdo: delete?
         // Push the initial state onto the state manager
-        stateManager.pushState(WorldState())
+        stateManager.pushState(initialState)
     }
 
     fun run() {
@@ -78,8 +78,8 @@ class GameEngine(width: Int = 1200, height: Int = 720, title: String) {
         window.clear()
 
         // Render the current state
+        stateManager.render()
 
-        renderer.render() // TODO: delete renderer from gameengine, put it in gameObjects?
         window.update() // swaps buffers, must be last
 
 
