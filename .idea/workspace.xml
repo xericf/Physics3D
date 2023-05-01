@@ -5,14 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b42ed632-43c0-4448-9034-0e48ba03f40f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/Component/Component.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/Component/Mesh.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/Component/Script.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/Component/Transform.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/Exception/Exceptions.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/Engine/GameEngine.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/Engine/GameEngine.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/Engine/GameObject.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/Engine/GameObject.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/Engine/Renderer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/Component/Renderer.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/State/StateManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/State/StateManager.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
