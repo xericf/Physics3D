@@ -1,7 +1,6 @@
 package com.Engine
 
-import com.Component.Component
-import com.Component.Script
+import com.Component.*
 import com.Exception.ComponentAlreadyExistsException
 
 
@@ -9,6 +8,19 @@ class GameObject {
 
     private val scripts : MutableList<Script> = ArrayList()
     val components = mutableMapOf<String, Component>()
+
+    var renderer : Renderer? = null
+    var transform : Transform? = null
+
+    init {
+        val renderer = Renderer(this)
+        addComponent(renderer)
+
+        val mesh = Mesh(this)
+        addComponent(mesh)
+
+    }
+
     fun start() {
 
         for (script in scripts) {
