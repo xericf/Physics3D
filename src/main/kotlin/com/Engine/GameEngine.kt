@@ -1,10 +1,10 @@
 package com.Engine
 
+import com.Component.Renderer
 import com.GUI.Window
 import com.State.State
 import com.State.StateManager
 import com.State.WorldState
-import org.lwjgl.opengl.GL11
 
 class GameEngine(width: Int = 1200, height: Int = 720, title: String, private val initialState : State = WorldState()) {
 

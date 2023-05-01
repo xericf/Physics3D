@@ -1,13 +1,13 @@
-package com.Engine
+package com.Component
 
+import com.Engine.GameObject
+import com.Engine.Loader
+import com.Engine.ShaderProgram
 import com.IO.FileUtil
 import org.lwjgl.opengl.GL11.*
-import org.lwjgl.opengl.GL20.glVertexAttribPointer
-import org.lwjgl.system.MemoryUtil
-import java.nio.FloatBuffer
 import kotlin.properties.Delegates
 
-class Renderer {
+class Renderer(gameObject: GameObject) : Component(gameObject) {
 
     private var shaderProgram : ShaderProgram
     private var vaoId by Delegates.notNull<Int>()
