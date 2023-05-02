@@ -1,29 +1,32 @@
 package com.Engine
 
+import com.IO.FileUtil
 import org.lwjgl.opengl.GL20.*
 import kotlin.properties.Delegates
 
-class ShaderProgram {
+class ShaderProgram(private val shaderInfos : MutableList<ShaderInfo>) {
 
     private var programId : Int = 0
-    private var vertexShaderId : Int = 0
-    private var fragmentShaderId : Int = 0
 
+    // List of shader IDs
+    private val shaders : MutableList<Int> = mutableListOf()
     init {
         programId = glCreateProgram()
         if (programId == 0) {
             throw Exception("Could not create ShaderProgram")
         }
+
+        // load and create each shader
+        shaderInfos.forEach {
+            val shaderCode = FileUtil.loadShader(it.fileName)
+            shaders.add(createShader(shaderCode, it.type))
+        }
+
+        link()
     }
 
-    fun createVertexShader(shaderCode: String) {
-        vertexShaderId = createShader(shaderCode, GL_VERTEX_SHADER)
-    }
-
-    fun createFragmentShader(shaderCode: String) {
-        fragmentShaderId = createShader(shaderCode, GL_FRAGMENT_SHADER)
-    }
     private fun createShader(shaderCode : String, shaderType : Int) : Int {
+
         val shaderId : Int = glCreateShader(shaderType)
         if (shaderId == 0) {
             throw Exception("Shader not created correctly of type: $shaderType")
@@ -40,7 +43,7 @@ class ShaderProgram {
         return shaderId
     }
 
-    fun link() {
+    private fun link() {
 
         // links the program by programId, creates executables using currently attached vertex, fragment, and geometry shaders
         glLinkProgram(programId)
@@ -49,13 +52,7 @@ class ShaderProgram {
         }
 
         // detach shaders now that program is linked
-        if (vertexShaderId != 0) {
-            glDetachShader(programId, vertexShaderId)
-        }
-
-        if (fragmentShaderId != 0) {
-            glDetachShader(programId, fragmentShaderId)
-        }
+        shaders.forEach { glDetachShader(programId, it) }
 
         glValidateProgram(programId)
         if (glGetProgrami(programId, GL_VALIDATE_STATUS) == 0) {
@@ -76,5 +73,9 @@ class ShaderProgram {
         if (programId != 0) {
             glDeleteProgram(programId)
         }
+
+        shaders.forEach(::glDeleteProgram)
     }
+
+    data class ShaderInfo(val fileName : String, val type : Int)
 }

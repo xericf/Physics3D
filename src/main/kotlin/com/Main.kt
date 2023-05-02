@@ -3,7 +3,7 @@ package com
 import com.Engine.GameEngine
 
 
-// https://lwjglgamedev.gitbooks.io/3d-game-development-with-lwjgl/content/chapter02/chapter2.html
+// https://ahbejarano.gitbook.io/lwjglgamedev/chapter-03
 fun main() {
 
     val gameEngine = GameEngine(title = "3D Physics Engine")

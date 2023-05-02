@@ -5,6 +5,8 @@ import com.Engine.Loader
 import com.Engine.ShaderProgram
 import com.IO.FileUtil
 import org.lwjgl.opengl.GL11.*
+import org.lwjgl.opengl.GL20.GL_FRAGMENT_SHADER
+import org.lwjgl.opengl.GL20.GL_VERTEX_SHADER
 import kotlin.properties.Delegates
 
 class Renderer(gameObject: GameObject) : Component(gameObject) {
@@ -24,13 +26,11 @@ class Renderer(gameObject: GameObject) : Component(gameObject) {
         vboId = Loader.createVbo(vertices)
         Loader.configureAttribPointer(vboId = vboId, index = 0)
 
-        val frag = FileUtil.loadShader("/fragment.frag")
-        val vert = FileUtil.loadShader("/vertex.vert")
+        shaderProgram = ShaderProgram(mutableListOf(
+            ShaderProgram.ShaderInfo("/vertex.vert", GL_VERTEX_SHADER),
+            ShaderProgram.ShaderInfo("/fragment.frag", GL_FRAGMENT_SHADER)
+        ))
 
-        shaderProgram = ShaderProgram()
-        shaderProgram.createVertexShader(vert)
-        shaderProgram.createFragmentShader(frag)
-        shaderProgram.link()
 
     }
 
