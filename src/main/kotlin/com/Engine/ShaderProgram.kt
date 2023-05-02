@@ -52,7 +52,11 @@ class ShaderProgram(private val shaderInfos : MutableList<ShaderInfo>) {
         }
 
         // detach shaders now that program is linked
-        shaders.forEach { glDetachShader(programId, it) }
+        shaders.forEach {
+            glDetachShader(programId, it)
+        }
+
+        shaders.forEach(::glDeleteShader)
 
         glValidateProgram(programId)
         if (glGetProgrami(programId, GL_VALIDATE_STATUS) == 0) {
@@ -74,7 +78,6 @@ class ShaderProgram(private val shaderInfos : MutableList<ShaderInfo>) {
             glDeleteProgram(programId)
         }
 
-        shaders.forEach(::glDeleteProgram)
     }
 
     data class ShaderInfo(val fileName : String, val type : Int)
