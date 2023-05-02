@@ -31,7 +31,6 @@ class Renderer(gameObject: GameObject) : Component(gameObject) {
             ShaderProgram.ShaderInfo("/fragment.frag", GL_FRAGMENT_SHADER)
         ))
 
-
     }
 
     fun render() {

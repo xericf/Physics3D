@@ -77,7 +77,6 @@ class ShaderProgram(private val shaderInfos : MutableList<ShaderInfo>) {
         if (programId != 0) {
             glDeleteProgram(programId)
         }
-
     }
 
     data class ShaderInfo(val fileName : String, val type : Int)

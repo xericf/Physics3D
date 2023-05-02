@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b42ed632-43c0-4448-9034-0e48ba03f40f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/Component/Renderer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/Component/Renderer.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/Engine/ShaderProgram.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/Engine/ShaderProgram.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
